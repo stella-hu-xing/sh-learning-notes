@@ -30,7 +30,7 @@ kubectl create deployment --image=nginx nginx (--dry-run -o yaml)
 
 kubectl appply -f foo.yml
 
-## update pod without definiation yaml
+## update pod without definition yaml
 
 ```
 kubectl get pod <pod-name> -o yaml > pod-definition.yaml
@@ -108,18 +108,6 @@ kubectl scale replicaset myapp-replicaset.yml --replicas=2
 
 ## Deployment
 
-# A Deployment provides declarative updates for Pods and ReplicaSets.
-
-#
-
-# You describe a desired state in a Deployment, and the Deployment Controller changes the actual state
-
-# to the desired state at a controlled rate. You can define Deployments to create new ReplicaSets, or
-
-# to remove existing Deployments and adopt all their resources with new Deployments.
-
-# Note: Do not manage ReplicaSets owned by a Deployment.
-
 # rollback a deployment
 
 kubectl rollout undo deployment/my-deployment (--to-revision=2)
@@ -154,6 +142,16 @@ kubectl config set-context $(kubectl config current-context) --namespace=prod
 
 kubectl get pods --all-namespaces
 
-## Resource Quota
+## get files in a Pod
 
-can be used to limit resource quota in a namespace.
+kubectl exec <pod_name> -- ls -la
+
+## get pods status and reason
+
+k describe pod elephant | grep -A5 State
+
+_NOTE: Grep, short for “global regular expression print”, is a command used for searching and matching text patterns in files contained in the regular expressions._
+
+## delete the existing resource first and recreate a new one from the YAML file.
+
+kubectl replace -f elephant.yaml --force

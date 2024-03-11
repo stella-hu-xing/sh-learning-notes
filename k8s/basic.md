@@ -15,3 +15,15 @@ Ref: https://kubernetes.io/docs/concepts/overview/components/
 ### Namespaces VS Nodes
 
 ![IMG](../assets/namespaces-vs-nodes.png)
+
+### Resource Quota
+
+can be used to limit resource quota in a namespace.
+
+### Deployment
+
+A Deployment provides declarative updates for Pods and ReplicaSets.
+
+You describe a desired state in a Deployment, and the Deployment Controller changes the actual state to the desired state at a controlled rate. You can define Deployments to create new ReplicaSets, or to remove existing Deployments and adopt all their resources with new Deployments.
+
+**Note: Do not manage ReplicaSets owned by a Deployment.**

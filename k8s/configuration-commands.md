@@ -147,3 +147,25 @@ Notes:
 - Secrets are not encrypted, just encoded (base64 format), so don't check in the Secret to Git.
 - Secrets are not encrypted in ETCD.
 - Secrets can be accessible to Pods/Deployments in the same NameSpace.
+
+## SecurityContext
+
+```
+spec:
+    securityContext:
+        runAsUser: 1000
+        capabilities:
+            add: ["SYS_TIME"]
+```
+
+## Service Account
+
+```
+spec:
+    serviceAccountName: some-sa
+    automountServiceAccountToken: false
+```
+
+Create an authorization token for the service account
+
+`kubectl create token my-sa`
