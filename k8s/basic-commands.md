@@ -2,13 +2,83 @@
 
 kubectl create -f foo.yaml (--record)
 
-# update resources
+## create pod with image only
+
+kubectl run redis --image redis --replicas=4
+
+kubectl run nginx --image=nginx --dry-run=client -o yaml > nginx-deployment.yaml # generate yaml file but not create the pod
+
+kubectl run hazelcast --image=hazelcast --port=5701 (Start a single instance of hazelcast and let the container expose port 5701 . )
+
+## create service
+
+kubectl expose pod redis --port=6379 --name redis-service (This will automatically use the pod's labels as selectors)
+
+kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml (it will assume selectors as app=redis)
+
+kubectl expose pod nginx --port=80 --name nginx-service --type=NodePort (Create a Service named nginx of type NodePort to expose pod nginx's port 80 on port 30080 on the nodes)
+
+kubectl expose pod nginx --port=80 --target-port=8000 Create a service for a pod nginx, which serves on port 80 and connects to the containers on port 8000.
+
+## create a deployment
+
+kubectl create deployment --image=nginx nginx (--dry-run -o yaml)
+
+# Update pod
+
+## update resources
 
 kubectl appply -f foo.yml
+
+## update pod without definiation yaml
+
+```
+kubectl get pod <pod-name> -o yaml > pod-definition.yaml
+```
+
+Then edit the file to make the necessary changes, delete, and re-create the pod.
+
+## Formatting Output
+
+kubectl [command] [TYPE] [NAME] -o <output_format>
+
+Here are some of the commonly used formats:
+
+- `-o json` Output a JSON formatted API object.
+
+- `-o name` Print only the resource name and nothing else.
+
+- `-o wide` Output in the plain-text format with any additional information.
+
+- `-o yaml` Output a YAML formatted API object.
+
+## update properties
+
+To modify the properties of the pod, you can utilize the
+
+```
+kubectl edit pod <pod-name>
+```
+
+Please note that only the properties listed below are editable.
+
+- spec.containers[*].image
+
+- spec.initContainers[*].image
+
+- spec.activeDeadlineSeconds
+
+- spec.tolerations
+
+- spec.terminationGracePeriodSeconds
 
 # get resources
 
 kubectl get pod foo-pod
+
+# get the node on which a pod is running
+
+kubectl get pods -o wide
 
 # get all resources
 
@@ -17,6 +87,8 @@ kubectl get all
 ## ReplicaSet
 
 # delete replicaset
+
+Can use the `scale` command to delete all pods in existing replicaset.
 
 kubectl delete replicaset myapp-replicaset # also delete underlying pods
 
@@ -68,6 +140,20 @@ kubectl set image deployments/frontend simple-webapp=kodekloud/webapp-color:v2
 
 kubectl edit deployment/nginx-deployment
 
-## CKAD
+# Context
 
-Keep the code - 20KLOUD handy while registering for the CKA or CKAD exams at Linux Foundation to get a 20% discount.
+## get current context
+
+kubectl config current-context
+
+## switch namespace
+
+kubectl config set-context $(kubectl config current-context) --namespace=prod
+
+## get pods in all ns
+
+kubectl get pods --all-namespaces
+
+## Resource Quota
+
+can be used to limit resource quota in a namespace.
