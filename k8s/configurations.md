@@ -75,3 +75,67 @@ spec:
     type: Container
 
 ```
+
+## Taints and Tolerations
+
+Taints are set on Nodes, while Tolerants are set on Pods.
+
+Tolerations:
+
+```Pod
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+  tolerations:
+    - key: "app"
+      operator: "Equal"
+      value: "blue"
+      effect: "NoSchedule"
+```
+
+## Node Selector
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  nodeSelector:
+    size: large
+```
+
+## Node Affinity
+
+Improved from Node Selector.
+
+This following manifest describes a Pod that has a `requiredDuringSchedulingIgnoredDuringExecution` node affinity, `disktype: ssd`. This means that the pod will get scheduled only on a node that has a `disktype=ssd` label.
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: disktype
+            operator: In
+            values:
+            - ssd
+```
+
+Available:
+
+1.  requiredDuringSchedulingIgnoredDuringExecution
+2.  preferredDuringSchedulingIgnoredDuringExecution
+
+|     | During Scheduling                        | During Execution                   |
+| --- | ---------------------------------------- | ---------------------------------- |
+| T1  | Required (if not exist, don't place)     | Ignored (no impact once scheduled) |
+| T2  | Preferred (if not exist, place anywhere) | Ignored (no impact once scheduled) |
+

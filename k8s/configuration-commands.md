@@ -168,4 +168,18 @@ spec:
 
 Create an authorization token for the service account
 
-`kubectl create token my-sa`
+`kubectl create token <service-account>`
+
+## Taints and Tolerations
+
+`kubectl taint nodes  <node-name> <key>=<value>:{taint-effect}` ## NoSchedule | PreferNoSchedule | NoExecute
+
+## Node Selector
+
+add label into node
+
+`kubectl label nodes <node-name> <labelKey>=<labelValue>`
+
+## Node Affinity
+
+`kubectl get nodes --show-labels`

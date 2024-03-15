@@ -22,7 +22,7 @@ kubectl expose pod nginx --port=80 --target-port=8000 Create a service for a pod
 
 ## create a deployment
 
-kubectl create deployment --image=nginx nginx (--dry-run -o yaml)
+kubectl create deployment --image=nginx nginx --replicas=3 (--dry-run -o yaml)
 
 # Update pod
 
