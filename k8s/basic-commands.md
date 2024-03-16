@@ -2,6 +2,8 @@
 
 kubectl create -f foo.yaml (--record)
 
+k create -f . (create all resources in current folder)
+
 ## create pod with image only
 
 kubectl run redis --image redis --replicas=4
@@ -28,15 +30,7 @@ kubectl create deployment --image=nginx nginx --replicas=3 (--dry-run -o yaml)
 
 ## update resources
 
-kubectl appply -f foo.yml
-
-## update pod without definition yaml
-
-```
-kubectl get pod <pod-name> -o yaml > pod-definition.yaml
-```
-
-Then edit the file to make the necessary changes, delete, and re-create the pod.
+kubectl apply -f foo.yml
 
 ## Formatting Output
 
@@ -76,13 +70,17 @@ Please note that only the properties listed below are editable.
 
 kubectl get pod foo-pod
 
+with labels
+
+k get pods --selector env=prod,bu=finance,tier=frontend
+
 # get the node on which a pod is running
 
 kubectl get pods -o wide
 
 # get all resources
 
-kubectl get all
+`kubectl get all`
 
 ## ReplicaSet
 
@@ -155,3 +153,17 @@ _NOTE: Grep, short for “global regular expression print”, is a command used 
 ## delete the existing resource first and recreate a new one from the YAML file.
 
 kubectl replace -f elephant.yaml --force
+
+## inspect logs in pod
+
+`kubectl logs [-f] [-p] (POD | TYPE/NAME) [-c CONTAINER]`
+
+## output the pod manifest
+
+`kubectl get pod orange -o yaml > /root/orange.yaml.`
+
+## Display resource (CPU/memory) usage of nodes.
+
+`kubectl top node [NAME | -l label]`
+
+`kubectl top pod --sort-by='memory' --no-headers | head -1 ` (sort)
