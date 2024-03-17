@@ -32,6 +32,10 @@ kubectl create deployment --image=nginx nginx --replicas=3 (--dry-run -o yaml)
 
 kubectl apply -f foo.yml
 
+## update resouce forcely
+
+kubectl replace -f <pod>.yaml --force
+
 ## Formatting Output
 
 kubectl [command] [TYPE] [NAME] -o <output_format>
