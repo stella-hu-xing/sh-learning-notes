@@ -185,3 +185,22 @@ kubectl replace -f elephant.yaml --force
 `kubectl top node [NAME | -l label]`
 
 `kubectl top pod --sort-by='memory' --no-headers | head -1 ` (sort)
+
+# API server settings
+
+## check the kube-apiserver settings.
+
+1. get pods name ` k get pods --all-namespaces`
+2. then find the api server in `kube-system` namespace
+3. describe the api server pod
+
+# Switch Context
+
+only switch namespace:
+`kubectl config set-context --current --namespace=`
+
+# Get resource counts
+
+`kubectl get clusterroles --no-headers  | wc -l`
+
+`kubectl get clusterroles --no-headers  -o json | jq '.items | length'`
