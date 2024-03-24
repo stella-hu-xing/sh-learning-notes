@@ -49,3 +49,15 @@ create role
 create rolebinding (need role/clusterRole and user/serviceAccount)
 
 `k create rolebinding dev-user-binding --role=developer --user=dev-user`
+
+# Admission controller
+
+## check admission controlle
+
+`kube-apiserver -h | grep enable-admission-plugins`
+
+`kubectl exec -it kube-apiserver-controlplane -n kube-system -- kube-apiserver -h | grep 'enable-admission-plugins'`
+
+Since the `kube-apiserver` is running as pod you can check the process to see enabled and disabled plugins.
+
+`ps -ef | grep kube-apiserver | grep admission-plugins`

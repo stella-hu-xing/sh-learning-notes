@@ -126,3 +126,16 @@ roleRef:
 ```
 
 ##### Cluster Role + Cluster Role binding
+
+Role + RoleBinding are namespaced, they are not available beyond the namespace.
+
+Cluster role + Cluster role binding are cross cluster.
+
+#### Admission Controllers
+
+An admission controller is a piece of code that intercepts requests to the Kubernetes API server prior to persistence of the object, but after the request is authenticated and authorized.
+
+Admission controllers may be validating, mutating, or both. Mutating controllers may modify objects related to the requests they admit; validating controllers may not.
+
+Admission is divided into two phases.
+In the first phase, only mutating admission plugins run. In the second phase, only validating admission plugins run.
