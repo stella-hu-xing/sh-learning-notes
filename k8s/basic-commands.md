@@ -26,6 +26,20 @@ kubectl expose pod nginx --port=80 --target-port=8000 Create a service for a pod
 
 kubectl create deployment --image=nginx nginx --replicas=3 (--dry-run -o yaml)
 
+## create namespace
+
+k create namespace ingress-nginx
+
+## create ingress
+
+`k create ingress <ingress-name> --rule="host/path=service:port"`
+
+## create configmap
+
+## switch namespace context
+
+`kubectl config set-context --current --namespace=my-namespace`
+
 # Update pod
 
 ## update resources
