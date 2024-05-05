@@ -32,3 +32,8 @@ You describe a desired state in a Deployment, and the Deployment Controller chan
 ## API Groups
 
 https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#api-groups
+
+### Namespace
+
+To access applications/dbs in another namespace, need to use its service DNS.
+e.g. to access the db-service in `dev` ns, use the DNS `db-service.dev.svc.cluster.local`

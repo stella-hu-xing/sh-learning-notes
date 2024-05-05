@@ -139,3 +139,5 @@ Admission controllers may be validating, mutating, or both. Mutating controllers
 
 Admission is divided into two phases.
 In the first phase, only mutating admission plugins run. In the second phase, only validating admission plugins run.
+
+![](../assets/admission%20controller.png)

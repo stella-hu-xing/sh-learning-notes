@@ -22,6 +22,10 @@ kubectl expose pod nginx --port=80 --name nginx-service --type=NodePort (Create 
 
 kubectl expose pod nginx --port=80 --target-port=8000 Create a service for a pod nginx, which serves on port 80 and connects to the containers on port 8000.
 
+## expose a service for an Pod via existing service
+
+- need to make sure the selector in service matches the labels in Pod.
+
 ## create a deployment
 
 kubectl create deployment --image=nginx nginx --replicas=3 (--dry-run -o yaml)
@@ -35,6 +39,8 @@ k create namespace ingress-nginx
 `k create ingress <ingress-name> --rule="host/path=service:port"`
 
 ## create configmap
+
+`k create config my-config --from-literal=app_key=app_value --from-literal=app_key1=app_value1`
 
 ## switch namespace context
 

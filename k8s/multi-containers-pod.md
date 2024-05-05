@@ -49,6 +49,11 @@ spec:
 
 When a POD is first created the initContainer is run, and the process in the initContainer **must** run to a completion before the real container hosting the application starts.
 
-You can configure multiple such initContainers as well, like how we did for multi-pod containers. In that case each init container is run one at a time in sequential order.
+A Pod can have multiple containers running apps within it, but it can also have one or more init containers, which are run before the app containers are started.
+
+Init containers are exactly like regular containers, except:
+
+- Init containers always run to completion.
+- Each init container must complete successfully before the next one starts.
 
 If any of the initContainers fail to complete, Kubernetes restarts the Pod repeatedly until the Init Container succeeds.

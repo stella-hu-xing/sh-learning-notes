@@ -158,6 +158,10 @@ spec:
             add: ["SYS_TIME"]
 ```
 
+- check who executed the sleep process within the ubuntu-sleeper pod
+
+`kubectl exec ubuntu-sleeper -- whoami`
+
 ## Service Account
 
 ```
