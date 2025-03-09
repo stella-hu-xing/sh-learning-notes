@@ -16,8 +16,13 @@ kubectl get po nginx -o yaml # Not describe!
 # Get pod logs
 kubectl logs nginx -p # -p including previous instance
 
-# if logs exist inside pod
-kubectl exec pod -- cat /log/app.log
+# run commands in a pod (with container)
+
+kubectl run -it --rm busybox --image=gcr.io/google-containers/busybox sh
+## with existing pod
+kubectl exec <POD-NAME> -c <CONTAINER-NAME> -- <COMMAND>
+
+e.g. kubectl exec pod -- cat /log/app.log
 
 # Execute a simple shell on the nginx pod
 k exec -it nginx -- /bin/sh
