@@ -2,3 +2,4 @@
 
 - Kubernetes concepts and CKAD exam preparation
 - System Design
+- Algorithms
